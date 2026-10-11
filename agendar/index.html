@@ -1,0 +1,19 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Elanybraids</title>
+<style>body{font-family:system-ui,sans-serif;background:#fbf6ee;color:#3b2a14;text-align:center;padding:40px 20px}a,button{display:block;margin:14px auto;padding:14px;max-width:320px;width:100%;border-radius:12px;border:0;background:#A97C3F;color:#fff;font-size:1.05rem;text-decoration:none}</style></head><body>
+<h2 id="t">Abrindo...</h2>
+<div id="o" hidden><p>No momento estamos fora do ar. Chame a gente no WhatsApp ou tente de novo em instantes.</p><a href="https://wa.me/5581989702817">Chamar no WhatsApp</a><button onclick="location.reload()">Tentar de novo</button></div>
+<script>
+const P='/';
+async function go(){
+ try{
+  let b;
+  try{const r=await fetch('https://api.github.com/repos/elanybraids/agenda/contents/links.json',{headers:{Accept:'application/vnd.github.raw+json'},cache:'no-store'});b=(await r.json()).base;if(!b)throw 0}
+  catch(e){b=(await(await fetch('/agenda/links.json?'+Date.now())).json()).base}
+  const c=new AbortController(),t=setTimeout(()=>c.abort(),5000);
+  const r=await fetch(b+'/api/ping',{cache:'no-store',signal:c.signal});clearTimeout(t);
+  if(!r.ok)throw 0;
+  location.replace(b+P)
+ }catch(e){document.getElementById('t').textContent='Estamos fora do ar';document.getElementById('o').hidden=false}
+}
+go();
+</script></body></html>
